@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Galeria testowa</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      background: #f2f2f2;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+    .video {
+      cursor: pointer;
+      background: #fff;
+      padding: 10px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+    .video:hover {
+      transform: scale(1.03);
+    }
+    .video img {
+      max-width: 100%;
+      border-radius: 8px;
+    }
+    .video h3 {
+      margin: 10px 0 0;
+      font-size: 16px;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      position: relative;
+      width: 90%;
+      max-width: 800px;
+      aspect-ratio: 16/9;
+    }
+    .modal iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .close {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="gallery">
+    <div class="video" data-id="tc4DutQusgc">
+      <img src="https://img.youtube.com/vi/tc4DutQusgc/hqdefault.jpg" alt="JT Racing / Polaris">
+      <h3>JT Racing / Polaris</h3>
+    </div>
+    <div class="video" data-id="TxVCHo4UJmM">
+      <img src="https://img.youtube.com/vi/TxVCHo4UJmM/hqdefault.jpg" alt="YouTube Video">
+      <h3>YouTube Video (TxVCHo4UJmM)</h3>
+    </div>
+    <div class="video" data-id="hWYAkXBqaEE">
+      <img src="https://img.youtube.com/vi/hWYAkXBqaEE/hqdefault.jpg" alt="YouTube Video">
+      <h3>YouTube Video (hWYAkXBqaEE)</h3>
+    </div>
+    <div class="video" data-id="ATkM_bC6ryA">
+      <img src="https://img.youtube.com/vi/ATkM_bC6ryA/hqdefault.jpg" alt="TRL Piovra">
+      <h3>TRL Piovra</h3>
+    </div>
+    <div class="video" data-id="CwuLPZukaMA">
+      <img src="https://img.youtube.com/vi/CwuLPZukaMA/hqdefault.jpg" alt="Look mój">
+      <h3>Look mój</h3>
+    </div>
+  </div>
+  <div class="modal" id="videoModal">
+    <div class="modal-content">
+      <button class="close" onclick="closeModal()">&times;</button>
+      <iframe id="videoFrame" src="" allowfullscreen allow="autoplay"></iframe>
+    </div>
+  </div>
+  <script>
+    const modal = document.getElementById('videoModal');
+    const videoFrame = document.getElementById('videoFrame');
+    document.querySelectorAll('.video').forEach(item => {
+      item.addEventListener('click', () => {
+        const videoId = item.getAttribute('data-id');
+        videoFrame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+        modal.style.display = 'flex';
+      });
+    });
+    function closeModal() {
+      modal.style.display = 'none';
+      videoFrame.src = '';
+    }
+    window.addEventListener('click', e => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+  </script>
+</body>
+</html>
