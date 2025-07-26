@@ -1,125 +1,141 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Galeria testowa</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adam Fąfrowicz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: sans-serif;
       margin: 0;
-      background: #f2f2f2;
+      font-family: sans-serif;
+      background-color: #fff;
     }
-    .gallery {
+    .page-header {
+      font-family: 'Playfair Display', serif;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem;
+      font-size: 2.5rem;
+      background-color: #f8f8f8;
+      color: #222;
+      border-bottom: 1px solid #ddd;
+    }
+    .contact-link {
+      font-family: sans-serif;
+      font-size: 1rem;
+      text-decoration: none;
+      color: #444;
+    }
+    .contact-link:hover {
+      text-decoration: underline;
+    }
+    .video-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 20px;
-      padding: 20px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      padding: 4rem 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
     }
-    .video {
+    .video-thumbnail {
+      position: relative;
       cursor: pointer;
-      background: #fff;
-      padding: 10px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      transition: transform 0.2s;
+      background: #eee;
+      aspect-ratio: 16 / 9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      color: #000;
+      text-align: center;
     }
-    .video:hover {
-      transform: scale(1.03);
-    }
-    .video img {
-      max-width: 100%;
-      border-radius: 8px;
-    }
-    .video h3 {
-      margin: 10px 0 0;
-      font-size: 16px;
-    }
-    .modal {
+    .video-popup {
       display: none;
       position: fixed;
-      z-index: 1000;
-      left: 0;
       top: 0;
+      left: 0;
       width: 100vw;
       height: 100vh;
       background-color: rgba(0,0,0,0.8);
       justify-content: center;
       align-items: center;
+      z-index: 1000;
     }
-    .modal-content {
-      position: relative;
-      width: 90%;
+    .video-popup iframe {
+      width: 90vw;
       max-width: 800px;
-      aspect-ratio: 16/9;
+      height: 45vw;
+      max-height: 450px;
     }
-    .modal iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
+    .video-popup.active {
+      display: flex;
     }
-    .close {
+    .close-btn {
       position: absolute;
-      top: -10px;
-      right: -10px;
-      background: #fff;
-      border: none;
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      font-weight: bold;
+      top: 2rem;
+      right: 2rem;
+      font-size: 2rem;
+      color: white;
       cursor: pointer;
+    }
+    @media (max-width: 600px) {
+      .page-header {
+        font-size: 2rem;
+        padding: 1.5rem;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .contact-link {
+        margin-top: 0.5rem;
+      }
+      .video-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="gallery">
-    <div class="video" data-id="tc4DutQusgc">
-      <img src="https://img.youtube.com/vi/tc4DutQusgc/hqdefault.jpg" alt="JT Racing / Polaris">
-      <h3>JT Racing / Polaris</h3>
-    </div>
-    <div class="video" data-id="TxVCHo4UJmM">
-      <img src="https://img.youtube.com/vi/TxVCHo4UJmM/hqdefault.jpg" alt="YouTube Video">
-      <h3>YouTube Video (TxVCHo4UJmM)</h3>
-    </div>
-    <div class="video" data-id="hWYAkXBqaEE">
-      <img src="https://img.youtube.com/vi/hWYAkXBqaEE/hqdefault.jpg" alt="YouTube Video">
-      <h3>YouTube Video (hWYAkXBqaEE)</h3>
-    </div>
-    <div class="video" data-id="ATkM_bC6ryA">
-      <img src="https://img.youtube.com/vi/ATkM_bC6ryA/hqdefault.jpg" alt="TRL Piovra">
-      <h3>TRL Piovra</h3>
-    </div>
-    <div class="video" data-id="CwuLPZukaMA">
-      <img src="https://img.youtube.com/vi/CwuLPZukaMA/hqdefault.jpg" alt="Look mój">
-      <h3>Look mój</h3>
-    </div>
+  <header class="page-header">
+    <h1>Adam Fąfrowicz</h1>
+    <a href="#kontakt" class="contact-link">Kontakt</a>
+  </header>
+
+  <main>
+    <section class="video-grid">
+      <div class="video-thumbnail" data-video="https://www.youtube.com/embed/B914tq8r1vQ">Film 1</div>
+      <div class="video-thumbnail" data-video="https://www.youtube.com/embed/CwuLPZukaMA">Film 2</div>
+      <div class="video-thumbnail" data-video="https://drive.google.com/file/d/1GLO4df5TQRnP9c8uk8lC1oR_xeuN9VYu/preview">Google Drive</div>
+      <div class="video-thumbnail" data-video="https://www.youtube.com/embed/tc4DutQusgc">Film 4</div>
+      <div class="video-thumbnail" data-video="https://www.youtube.com/embed/hWYAkXBqaEE">Film 5</div>
+      <div class="video-thumbnail" data-video="https://www.youtube.com/embed/TxVCHo4UJmM">Film 6</div>
+    </section>
+  </main>
+
+  <div class="video-popup" id="videoPopup">
+    <div class="close-btn" onclick="closePopup()">&times;</div>
+    <iframe id="popupIframe" src="" frameborder="0" allowfullscreen></iframe>
   </div>
-  <div class="modal" id="videoModal">
-    <div class="modal-content">
-      <button class="close" onclick="closeModal()">&times;</button>
-      <iframe id="videoFrame" src="" allowfullscreen allow="autoplay"></iframe>
-    </div>
-  </div>
+
   <script>
-    const modal = document.getElementById('videoModal');
-    const videoFrame = document.getElementById('videoFrame');
-    document.querySelectorAll('.video').forEach(item => {
-      item.addEventListener('click', () => {
-        const videoId = item.getAttribute('data-id');
-        videoFrame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-        modal.style.display = 'flex';
+    const thumbnails = document.querySelectorAll('.video-thumbnail[data-video]');
+    const popup = document.getElementById('videoPopup');
+    const iframe = document.getElementById('popupIframe');
+
+    thumbnails.forEach(thumb => {
+      thumb.addEventListener('click', () => {
+        const videoUrl = thumb.getAttribute('data-video');
+        iframe.src = videoUrl;
+        popup.classList.add('active');
       });
     });
-    function closeModal() {
-      modal.style.display = 'none';
-      videoFrame.src = '';
+
+    function closePopup() {
+      iframe.src = '';
+      popup.classList.remove('active');
     }
-    window.addEventListener('click', e => {
-      if (e.target === modal) {
-        closeModal();
-      }
-    });
   </script>
 </body>
 </html>
